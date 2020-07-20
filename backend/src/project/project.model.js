@@ -5,7 +5,7 @@ const ProjectSchema = new mongoose.Schema({
     type: Date,
     default: Date.now,
   },
-  step1: String,
+  projectName: String,
   step2: String,
   step3: String,
   step4: String,

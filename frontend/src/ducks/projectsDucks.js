@@ -22,21 +22,21 @@ export const Types = {
   DELETE_PROJECTS_SUCCESS,
 };
 
-const initialState = { data: [] };
+const initialState = { data: [], currentProject: null };
 
 export default function ProjectsReducer(state = initialState, action) {
   if (!action) return state;
 
   switch (action.type) {
-    case GET_PROJECTS_BY_ID_SUCCESS:
-    case EDIT_PROJECTS_BY_ID_SUCCESS:
-    case CREATE_PROJECTS_SUCCESS:
-      return { ...state, [action.payload.id]: action.payload };
     case DELETE_PROJECTS_SUCCESS:
       return {
         data: state.data.filter((project) => project !== action.payload),
       };
+    case GET_PROJECTS_BY_ID_SUCCESS:
+      return { ...state, currentProject: action.payload };
     case GET_PROJECTS_SUCCESS:
+    case EDIT_PROJECTS_BY_ID_SUCCESS:
+    case CREATE_PROJECTS_SUCCESS:
       return { ...state, data: action.payload };
     default:
       return state;
@@ -93,6 +93,7 @@ export const Actions = {
   editProjectsById,
   editProjectsByIdSuccess,
   createProjects,
+  createProjectsSuccess,
   deleteProjects,
   deleteProjectsSuccess,
 };

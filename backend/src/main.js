@@ -17,11 +17,10 @@ async function bootstrap() {
   const app = express();
 
   app.use(bodyParser.json());
-
   app.use("/auth", authRouter);
   app.use("/projects", projectsRouter);
 
-  app.listen(3000, console.log("server is on: 3000"));
+  app.listen(5000, console.log("server is on: 5000"));
 }
 
 bootstrap();

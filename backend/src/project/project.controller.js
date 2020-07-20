@@ -2,13 +2,13 @@ import ProjectService from "./project.service";
 
 export const createNewProject = async (req, res) => {
   console.log(req.body);
-
+  const userId = req.user.id;
   try {
     if (req.body === undefined) {
       return res.status(400).send();
     }
     const newProject = req.body;
-    const projects = await ProjectService.createNewProject(newProject);
+    const projects = await ProjectService.createNewProject(newProject, userId);
     res.json(projects);
   } catch (error) {
     console.log("createNewProject error", error.stack);
@@ -31,8 +31,9 @@ export const deleteProject = async (req, res) => {
 };
 
 export const getProjects = async (req, res) => {
+  const userId = req.user.id;
   try {
-    const Projects = await ProjectService.getProjects();
+    const Projects = await ProjectService.getProjects(userId);
     return res.json(Projects);
   } catch (error) {
     console.log("getUsers error", error.stack);
@@ -41,6 +42,7 @@ export const getProjects = async (req, res) => {
 };
 
 export const updateProject = async (req, res) => {
+  const userId = req.user.id;
   try {
     if (!req.params.id) {
       return res.status(400).send();
@@ -50,7 +52,11 @@ export const updateProject = async (req, res) => {
     }
     const _id = req.params.id;
     const newProject = req.body;
-    const projects = await ProjectService.updateProject(newProject, _id);
+    const projects = await ProjectService.updateProject(
+      newProject,
+      _id,
+      userId
+    );
     return res.json(projects);
   } catch (error) {
     console.log("updateProject error", error.stack);

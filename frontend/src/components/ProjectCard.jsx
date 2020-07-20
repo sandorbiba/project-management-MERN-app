@@ -1,12 +1,13 @@
 import React from "react";
 import { Link } from "react-router-dom";
 
-const ProjectCard = () => {
-  const currentProjectId = 6;
+const ProjectCard = ({ project }) => {
+  const { _id, projectName, kickoffDate } = project;
   return (
     <div>
-      <h1>Project Name</h1>
-      <Link to={`/${currentProjectId}`}>
+      <h1>{projectName}</h1>
+      <h1>{kickoffDate}</h1>
+      <Link to={`/projects/${_id}`}>
         <button>Open</button>
       </Link>
     </div>

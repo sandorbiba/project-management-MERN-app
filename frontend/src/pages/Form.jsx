@@ -1,16 +1,19 @@
-import React, { useState } from "react";
-import Login from "../components/Login";
-import Register from "../components/Register";
+import React from "react";
 
 const Form = () => {
-  const [state, setstate] = useState(true);
-
   return (
     <div>
-      {state ? <Login /> : <Register />}
-      <button onClick={() => setstate(!state)}>
-        {state ? "Register" : "Login"}
-      </button>
+      <h1>Project Management MERN App</h1>
+      <p>
+        Simple full stack Project Management Application with Node & React to
+        manage user interviews and track user stories.
+      </p>
+      <div>
+        <a href="/login">Login</a>
+      </div>
+      <div>
+        <a href="/register">Register</a>
+      </div>
     </div>
   );
 };

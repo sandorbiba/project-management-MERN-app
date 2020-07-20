@@ -11,26 +11,18 @@ const projectSchema = Yup.object().shape({
   step6: Yup.string().required("Required"),
   step7: Yup.string().required("Required"),
   step8: Yup.string().required("Required"),
-  step9: Yup.string().required("Required"),
+  est: Yup.number().required("Required"),
 });
 
-const ProjectForm = () => (
+const ProjectForm = ({ currentProject, handleSubmit, _id, history }) => (
   <div>
     <Formik
-      initialValues={{
-        projectName: "",
-        step2: "",
-        step3: "",
-        step4: "",
-        step5: "",
-        step6: "",
-        step7: "",
-        step8: "",
-        step9: 1,
-      }}
+      initialValues={currentProject}
       validationSchema={projectSchema}
       onSubmit={(values) => {
-        alert(JSON.stringify(values, null, 2));
+        values.est = parseInt(values.est, 10);
+        const project = _id ? { ...values, _id } : values;
+        handleSubmit({ project, history });
       }}
     >
       {({ errors, touched, values }) => (
@@ -90,8 +82,8 @@ const ProjectForm = () => (
           </div>
 
           <div>
-            <label htmlFor="step9">step9</label>
-            <Field as="select" name="step9">
+            <label htmlFor="est">est</label>
+            <Field as="select" name="est">
               <option value="1">1</option>
               <option value="2">2</option>
               <option value="3">3</option>
@@ -101,7 +93,7 @@ const ProjectForm = () => (
               <option value="21">21</option>
               <option value="34">34</option>
             </Field>
-            {errors.step9 && touched.step9 ? <div>{errors.step9}</div> : null}
+            {errors.est && touched.est ? <div>{errors.est}</div> : null}
           </div>
 
           <button
@@ -115,7 +107,7 @@ const ProjectForm = () => (
               values.step6 === "" ||
               values.step7 === "" ||
               values.step8 === "" ||
-              values.step9 === ""
+              values.est === ""
                 ? "disabled"
                 : ""
             }
@@ -127,5 +119,20 @@ const ProjectForm = () => (
     </Formik>
   </div>
 );
+
+ProjectForm.defaultProps = {
+  _id: "",
+  currentProject: {
+    projectName: "",
+    step2: "",
+    step3: "",
+    step4: "",
+    step5: "",
+    step6: "",
+    step7: "",
+    step8: "",
+    est: 1,
+  },
+};
 
 export default ProjectForm;

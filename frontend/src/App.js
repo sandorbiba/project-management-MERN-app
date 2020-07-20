@@ -17,9 +17,9 @@ function App() {
           <Route path="/login" component={Login} />
           <Route path="/register" component={Register} />
           <Route path="/create" component={CreateProject} />
+          <Route path="/projects/:projectId/edit" component={EditProject} />
+          <Route path="/projects/:projectId" component={ProjectDetails} />
           <Route path="/projects" component={UsersProjects} />
-          <Route path="/:projectId/edit" component={EditProject} />
-          <Route path="/:projectId" component={ProjectDetails} />
           <Route exact path="/" component={Form} />
         </Switch>
       </Router>

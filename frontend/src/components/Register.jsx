@@ -21,8 +21,9 @@ const registerSchema = Yup.object().shape({
     .oneOf([Yup.ref("password"), ""], "Passwords must match"),
 });
 
-const Register = ({ register, history }) => (
+const Register = ({ register, ...props }) => (
   <div>
+    {console.log(props)}
     <Formik
       initialValues={{
         username: "",
@@ -33,7 +34,7 @@ const Register = ({ register, history }) => (
       validationSchema={registerSchema}
       onSubmit={(values) => {
         const { username, email, password } = values;
-        register({ username, email, password, history });
+        register({ username, email, password, history: 0 });
       }}
     >
       {({ errors, touched, values }) => (

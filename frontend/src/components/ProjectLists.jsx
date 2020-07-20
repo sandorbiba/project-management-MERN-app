@@ -1,16 +1,18 @@
 import React from "react";
 import ProjectCard from "./ProjectCard";
 
-const ProjectLists = () => {
+const ProjectLists = ({ data }) => {
   return (
     <div>
-      <ProjectCard />
-      <ProjectCard />
-      <ProjectCard />
-      <ProjectCard />
-      <ProjectCard />
-      <ProjectCard />
-      <ProjectCard />
+      {data ? (
+        <div>
+          {data.map((project) => (
+            <ProjectCard key={project._id} project={project} />
+          ))}
+        </div>
+      ) : (
+        <p>Projectless</p>
+      )}
     </div>
   );
 };

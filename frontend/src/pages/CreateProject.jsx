@@ -1,13 +1,17 @@
 import React from "react";
 import ProjectForm from "../components/ProjectForm";
+import { createProjects } from "../ducks/projectsDucks";
+import { connect } from "react-redux";
 
-const CreateProject = () => {
+const CreateProject = ({ createProjects, history }) => {
   return (
     <div>
       CreateProject
-      <ProjectForm />
+      <ProjectForm handleSubmit={createProjects} history={history} />
     </div>
   );
 };
 
-export default CreateProject;
+const mapDispatchToProps = { createProjects };
+
+export default connect(null, mapDispatchToProps)(CreateProject);

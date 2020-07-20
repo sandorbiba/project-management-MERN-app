@@ -1,4 +1,5 @@
 import express from "express";
+import expressJwt from "express-jwt";
 import {
   createNewProject,
   deleteProject,
@@ -7,8 +8,10 @@ import {
   getProjectById,
 } from "./project.controller";
 const projectsRouter = express.Router();
+const authenticate = expressJwt({ secret: "titkosalma" });
 
 projectsRouter
+  .use(authenticate)
   .post("/", createNewProject)
   .delete("/:id", deleteProject)
   .put("/:id", updateProject)

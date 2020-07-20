@@ -1,8 +1,14 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Link } from "react-router-dom";
+import { getProjects } from "../ducks/projectsDucks";
+import { connect } from "react-redux";
 import ProjectLists from "../components/ProjectLists";
 
-const UsersProjects = () => {
+const UsersProjects = ({ getProjects, data }) => {
+  useEffect(() => {
+    getProjects();
+  }, [getProjects]);
+
   return (
     <div>
       <h1>
@@ -15,9 +21,12 @@ const UsersProjects = () => {
       <Link to="/create">
         <button>New Project</button>
       </Link>
-      <ProjectLists />
+      <ProjectLists data={data} />
     </div>
   );
 };
 
-export default UsersProjects;
+const mapDispatchToProps = { getProjects };
+const mapStateToProps = ({ projects }) => ({ data: projects.data });
+
+export default connect(mapStateToProps, mapDispatchToProps)(UsersProjects);
