@@ -6,7 +6,7 @@ const ProjectCard = ({ project }) => {
   return (
     <div>
       <h1>{projectName}</h1>
-      <h1>{kickoffDate}</h1>
+      <h4>{kickoffDate}</h4>
       <Link to={`/projects/${_id}`}>
         <button>Open</button>
       </Link>

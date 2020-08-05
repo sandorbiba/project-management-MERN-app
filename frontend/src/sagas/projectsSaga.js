@@ -7,7 +7,6 @@ const axios = new AxiosService();
 function* getProjects(action) {
   try {
     const { data } = yield call(axios.axiosService.get, "/projects");
-    yield console.log(data);
     yield put(Actions.getProjectsSuccess(data));
   } catch (e) {
     yield console.log("getProjects", e);

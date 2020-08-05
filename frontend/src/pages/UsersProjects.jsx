@@ -4,7 +4,7 @@ import { getProjects } from "../ducks/projectsDucks";
 import { connect } from "react-redux";
 import ProjectLists from "../components/ProjectLists";
 
-const UsersProjects = ({ getProjects, data }) => {
+const UsersProjects = ({ getProjects, data, username }) => {
   useEffect(() => {
     getProjects();
   }, [getProjects]);
@@ -12,12 +12,15 @@ const UsersProjects = ({ getProjects, data }) => {
   return (
     <div>
       <h1>
-        Hello Username!
+        Hello {username}!
         <span aria-label="emoji" role="img">
+          {" "}
           👋
         </span>
       </h1>
-      <button>Logout</button>
+      <Link to="/">
+        <button>Logout</button>
+      </Link>
       <Link to="/create">
         <button>New Project</button>
       </Link>
@@ -27,6 +30,9 @@ const UsersProjects = ({ getProjects, data }) => {
 };
 
 const mapDispatchToProps = { getProjects };
-const mapStateToProps = ({ projects }) => ({ data: projects.data });
+const mapStateToProps = ({ projects, users }) => ({
+  data: projects.data,
+  username: users.username,
+});
 
 export default connect(mapStateToProps, mapDispatchToProps)(UsersProjects);
